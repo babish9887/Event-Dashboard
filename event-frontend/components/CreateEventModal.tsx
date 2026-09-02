@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useCreateEvent } from '@/hooks/useEvents';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -62,7 +62,7 @@ export default function CreateEventModal({ isOpen, onClose }: Props) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!form.title || !form.date || !form.location) {
       setError('Title, date, and location are required.');
@@ -83,7 +83,7 @@ export default function CreateEventModal({ isOpen, onClose }: Props) {
           setSelectedTime('09:00');
           onClose();
         },
-        onError: (err: any) => setError(err.message || 'Failed to create event'),
+        onError: (err: Error) => setError(err.message || 'Failed to create event'),
       }
     );
   };
